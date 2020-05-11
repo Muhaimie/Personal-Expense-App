@@ -7,7 +7,9 @@ class TransactionList extends StatelessWidget {
 
 final List<Transaction> transactions;
 
-TransactionList(this.transactions);
+final Function deleteTransaction;
+
+TransactionList(this.transactions,this.deleteTransaction);
 
 @override
 Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ Widget build(BuildContext context) {
                   itemBuilder: (ctx, index) {
                     return 
                     Card(
-                      elevation: 10,
+                      elevation: 2,
                       margin: EdgeInsets.symmetric(vertical:8,horizontal:5),
                         child: ListTile(
                         leading: CircleAvatar(radius:30, 
@@ -34,7 +36,10 @@ Widget build(BuildContext context) {
                           child: FittedBox(child: Text("\$${transactions[index].amount}")))),
                           title: Text(transactions[index].title, style:Theme.of(context).textTheme.title),
                           subtitle: Text(DateFormat.yMMMd().format(transactions[index].date)),
-                          trailing:IconButton(icon: Icon(Icons.face)),
+                          trailing:IconButton(icon: Icon(Icons.delete), color:Theme.of(context).errorColor, 
+                            onPressed: (){
+                              deleteTransaction(transactions[index].id);
+                            }),
                       ),
                     );
                   },

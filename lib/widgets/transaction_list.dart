@@ -20,7 +20,7 @@ Widget build(BuildContext context) {
         Text("No transaction added yet!",style:Theme.of(context).textTheme.title),
         SizedBox(height:100),
         Container(
-          height: 200,
+          //height: 700,
           child: Image.asset("assets/images/waiting.png", fit:BoxFit.cover))
       ],
     ): ListView.builder(

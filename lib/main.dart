@@ -128,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Chart(_recentTransaction),
-              TransactionList(_userTransaction, _deleteTransaction)
+              Expanded
+              (child: TransactionList(_userTransaction, _deleteTransaction))
               
             ]
           ),

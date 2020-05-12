@@ -11,14 +11,16 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return LayoutBuilder(builder: (ctx, constraints){
+        
+        return Column(
       children: <Widget>[
         Container(
-          height: 20,
+          height: constraints.maxHeight * 0.15,
           child: FittedBox(child: Text("\$${spendingAmount.toStringAsFixed(0)}"))),
-        SizedBox(height: 4),
+        SizedBox(height: constraints.maxHeight * 0.05),
         Container(
-          height:60,
+          height:constraints.maxHeight * 0.6,
           width:10,
           child:Stack(children: <Widget>[
             Container(decoration:BoxDecoration(
@@ -31,9 +33,12 @@ class ChartBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(10))))
           ],)
         ),
-        SizedBox(height:4),
-        Text(label)
+        SizedBox(height: constraints.maxHeight * 0.05),
+        Container(
+          height: constraints.maxHeight * 0.15,
+          child: FittedBox(child: Text(label)))
       ],
     );
+    }) ;
   }
 }

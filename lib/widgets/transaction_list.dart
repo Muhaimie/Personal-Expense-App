@@ -13,17 +13,23 @@ TransactionList(this.transactions,this.deleteTransaction);
 
 @override
 Widget build(BuildContext context) {
-  return Container(
-    height: 500,
-    child: transactions.isEmpty ? Column(
-      children: <Widget>[
-        Text("No transaction added yet!",style:Theme.of(context).textTheme.title),
-        SizedBox(height:100),
-        Container(
-          //height: 700,
-          child: Image.asset("assets/images/waiting.png", fit:BoxFit.cover))
-      ],
-    ): ListView.builder(
+
+  //checking orientation
+  final isLandscape =  MediaQuery.of(context).orientation == Orientation.landscape;
+
+  return  transactions.isEmpty ?
+  LayoutBuilder(builder: (ctx, constraint){
+      return Column(
+        children: <Widget>[
+          Text("No transaction added yet!",style:Theme.of(context).textTheme.title),
+          SizedBox(height:10),
+          Container(
+            height: constraint.maxHeight * 0.6,
+            child: Image.asset("assets/images/waiting.png", fit:BoxFit.cover))
+        ],
+    );
+  })
+   : ListView.builder(
                   itemBuilder: (ctx, index) {
                     return 
                     Card(
@@ -44,7 +50,6 @@ Widget build(BuildContext context) {
                     );
                   },
                   itemCount: transactions.length,
-    ), 
-  );
+    );
 }
 }

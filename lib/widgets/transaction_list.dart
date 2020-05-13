@@ -14,8 +14,7 @@ TransactionList(this.transactions,this.deleteTransaction);
 @override
 Widget build(BuildContext context) {
 
-  //checking orientation
-  final isLandscape =  MediaQuery.of(context).orientation == Orientation.landscape;
+  final mediaQuery = MediaQuery.of(context);
 
   return  transactions.isEmpty ?
   LayoutBuilder(builder: (ctx, constraint){
@@ -42,7 +41,9 @@ Widget build(BuildContext context) {
                           child: FittedBox(child: Text("\$${transactions[index].amount}")))),
                           title: Text(transactions[index].title, style:Theme.of(context).textTheme.title),
                           subtitle: Text(DateFormat.yMMMd().format(transactions[index].date)),
-                          trailing:IconButton(icon: Icon(Icons.delete), color:Theme.of(context).errorColor, 
+                          trailing: mediaQuery.size.width > 500 ? 
+                          FlatButton.icon(textColor:  Theme.of(context).errorColor,onPressed: ()=>deleteTransaction(transactions[index].id), icon: Icon(Icons.delete), label: Text("Delete")) :
+                          IconButton(icon: Icon(Icons.delete), color:Theme.of(context).errorColor, 
                             onPressed: (){
                               deleteTransaction(transactions[index].id);
                             }),
